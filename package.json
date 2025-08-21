@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "mongodb": "4.8.0",
+    "mongoose": "6.4.6",
     "next": "12.0.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
