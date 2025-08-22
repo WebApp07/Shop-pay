@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@reduxjs/toolkit':
         specifier: 1.8.3
-        version: 1.8.3(react-redux@8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(redux@4.2.0))(react@19.1.0)
+        version: 1.8.3(react-redux@8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(redux@4.2.0))(react@17.0.2)
       mongodb:
         specifier: 4.8.0
         version: 4.8.0
@@ -19,19 +19,19 @@ importers:
         version: 6.4.6
       next:
         specifier: 12.0.1
-        version: 12.0.1(@babel/core@7.28.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.53.0)(webpack@4.47.0)
+        version: 12.0.1(@babel/core@7.28.3)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(sass@1.53.0)(webpack@4.47.0)
       next-redux-wrapper:
         specifier: 7.0.5
-        version: 7.0.5(next@12.0.1(@babel/core@7.28.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.53.0)(webpack@4.47.0))(react-redux@8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(redux@4.2.0))(react@19.1.0)
+        version: 7.0.5(next@12.0.1(@babel/core@7.28.3)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(sass@1.53.0)(webpack@4.47.0))(react-redux@8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(redux@4.2.0))(react@17.0.2)
       react:
-        specifier: 19.1.0
-        version: 19.1.0
+        specifier: 17.0.2
+        version: 17.0.2
       react-dom:
-        specifier: 19.1.0
-        version: 19.1.0(react@19.1.0)
+        specifier: 17.0.2
+        version: 17.0.2(react@17.0.2)
       react-redux:
         specifier: 8.0.2
-        version: 8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(redux@4.2.0)
+        version: 8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(redux@4.2.0)
       redux:
         specifier: 4.2.0
         version: 4.2.0
@@ -40,7 +40,7 @@ importers:
         version: 2.13.9(redux@4.2.0)
       redux-persist:
         specifier: 6.0.0
-        version: 6.0.0(react@19.1.0)(redux@4.2.0)
+        version: 6.0.0(react@17.0.2)(redux@4.2.0)
       redux-thunk:
         specifier: 2.4.1
         version: 2.4.1(redux@4.2.0)
@@ -2653,10 +2653,10 @@ packages:
     resolution: {integrity: sha512-9WmIKF6mkvA0SLmA2Knm9+qj89e+j1zqgyn8aXGd7+nAduPoqgI9lO57SAZNn/Byzo5P7JhXTyg9PzaJbH73bA==}
     engines: {node: '>= 0.8'}
 
-  react-dom@19.1.0:
-    resolution: {integrity: sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g==}
+  react-dom@17.0.2:
+    resolution: {integrity: sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==}
     peerDependencies:
-      react: ^19.1.0
+      react: 17.0.2
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -2700,8 +2700,8 @@ packages:
       react-dom: 0.0.0-experimental-3c4c1c470-20211021
       webpack: ^4.43.0
 
-  react@19.1.0:
-    resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
+  react@17.0.2:
+    resolution: {integrity: sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==}
     engines: {node: '>=0.10.0'}
 
   readable-stream@2.3.8:
@@ -2853,8 +2853,8 @@ packages:
     engines: {node: '>=12.0.0'}
     hasBin: true
 
-  scheduler@0.26.0:
-    resolution: {integrity: sha512-NlHwttCI/l5gCPR3D1nNXtWABUmBwvZpEQiD4IXSbIDq8BzLIK/7Ir5gTFSGZDUu37K5cMNp0hFtzO38sC7gWA==}
+  scheduler@0.20.2:
+    resolution: {integrity: sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==}
 
   schema-utils@1.0.0:
     resolution: {integrity: sha512-i27Mic4KovM/lnGsy8whRCHhc7VicJajAjTrYg11K9zfZXnYIt4k5F+kZkwjnrhKzLic/HLU4j11mjsz2G/75g==}
@@ -3672,7 +3672,7 @@ snapshots:
 
   '@next/polyfill-module@12.0.1': {}
 
-  '@next/react-dev-overlay@12.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(webpack@4.47.0)':
+  '@next/react-dev-overlay@12.0.1(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(webpack@4.47.0)':
     dependencies:
       '@babel/code-frame': 7.12.11
       anser: 1.4.9
@@ -3681,8 +3681,8 @@ snapshots:
       css.escape: 1.5.1
       data-uri-to-buffer: 3.0.1
       platform: 1.3.6
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+      react: 17.0.2
+      react-dom: 17.0.2(react@17.0.2)
       shell-quote: 1.7.2
       source-map: 0.8.0-beta.0
       stacktrace-parser: 0.1.10
@@ -3747,15 +3747,15 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@reduxjs/toolkit@1.8.3(react-redux@8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(redux@4.2.0))(react@19.1.0)':
+  '@reduxjs/toolkit@1.8.3(react-redux@8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(redux@4.2.0))(react@17.0.2)':
     dependencies:
       immer: 9.0.21
       redux: 4.2.0
       redux-thunk: 2.4.1(redux@4.2.0)
       reselect: 4.1.8
     optionalDependencies:
-      react: 19.1.0
-      react-redux: 8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(redux@4.2.0)
+      react: 17.0.2
+      react-redux: 8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(redux@4.2.0)
 
   '@rtsao/scc@1.1.0': {}
 
@@ -6082,19 +6082,19 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next-redux-wrapper@7.0.5(next@12.0.1(@babel/core@7.28.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.53.0)(webpack@4.47.0))(react-redux@8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(redux@4.2.0))(react@19.1.0):
+  next-redux-wrapper@7.0.5(next@12.0.1(@babel/core@7.28.3)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(sass@1.53.0)(webpack@4.47.0))(react-redux@8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(redux@4.2.0))(react@17.0.2):
     dependencies:
-      next: 12.0.1(@babel/core@7.28.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.53.0)(webpack@4.47.0)
-      react: 19.1.0
-      react-redux: 8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(redux@4.2.0)
+      next: 12.0.1(@babel/core@7.28.3)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(sass@1.53.0)(webpack@4.47.0)
+      react: 17.0.2
+      react-redux: 8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(redux@4.2.0)
 
-  next@12.0.1(@babel/core@7.28.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.53.0)(webpack@4.47.0):
+  next@12.0.1(@babel/core@7.28.3)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(sass@1.53.0)(webpack@4.47.0):
     dependencies:
       '@babel/runtime': 7.15.4
       '@hapi/accept': 5.0.2
       '@next/env': 12.0.1
       '@next/polyfill-module': 12.0.1
-      '@next/react-dev-overlay': 12.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(webpack@4.47.0)
+      '@next/react-dev-overlay': 12.0.1(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(webpack@4.47.0)
       '@next/react-refresh-utils': 12.0.1(react-refresh@0.8.3)(webpack@4.47.0)
       '@node-rs/helper': 1.2.1
       acorn: 8.5.0
@@ -6126,19 +6126,19 @@ snapshots:
       process: 0.11.10
       querystring-es3: 0.2.1
       raw-body: 2.4.1
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+      react: 17.0.2
+      react-dom: 17.0.2(react@17.0.2)
       react-is: 17.0.2
       react-refresh: 0.8.3
-      react-server-dom-webpack: 0.0.0-experimental-3c4c1c470-20211021(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(webpack@4.47.0)
+      react-server-dom-webpack: 0.0.0-experimental-3c4c1c470-20211021(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(webpack@4.47.0)
       regenerator-runtime: 0.13.4
       stream-browserify: 3.0.0
       stream-http: 3.1.1
       string_decoder: 1.3.0
-      styled-jsx: 5.0.0-beta.3(@babel/core@7.28.3)(react@19.1.0)
+      styled-jsx: 5.0.0-beta.3(@babel/core@7.28.3)(react@17.0.2)
       timers-browserify: 2.0.12
       tty-browserify: 0.0.1
-      use-subscription: 1.5.1(react@19.1.0)
+      use-subscription: 1.5.1(react@17.0.2)
       util: 0.12.4
       vm-browserify: 1.1.2
       watchpack: 2.1.1
@@ -6466,10 +6466,12 @@ snapshots:
       iconv-lite: 0.4.24
       unpipe: 1.0.0
 
-  react-dom@19.1.0(react@19.1.0):
+  react-dom@17.0.2(react@17.0.2):
     dependencies:
-      react: 19.1.0
-      scheduler: 0.26.0
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      react: 17.0.2
+      scheduler: 0.20.2
 
   react-is@16.13.1: {}
 
@@ -6477,34 +6479,37 @@ snapshots:
 
   react-is@18.3.1: {}
 
-  react-redux@8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(redux@4.2.0):
+  react-redux@8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(redux@4.2.0):
     dependencies:
       '@babel/runtime': 7.15.4
       '@types/hoist-non-react-statics': 3.3.7(@types/react@19.1.10)
       '@types/use-sync-external-store': 0.0.3
       hoist-non-react-statics: 3.3.2
-      react: 19.1.0
+      react: 17.0.2
       react-is: 18.3.1
-      use-sync-external-store: 1.5.0(react@19.1.0)
+      use-sync-external-store: 1.5.0(react@17.0.2)
     optionalDependencies:
       '@types/react': 19.1.10
       '@types/react-dom': 19.1.7(@types/react@19.1.10)
-      react-dom: 19.1.0(react@19.1.0)
+      react-dom: 17.0.2(react@17.0.2)
       redux: 4.2.0
 
   react-refresh@0.8.3: {}
 
-  react-server-dom-webpack@0.0.0-experimental-3c4c1c470-20211021(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(webpack@4.47.0):
+  react-server-dom-webpack@0.0.0-experimental-3c4c1c470-20211021(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(webpack@4.47.0):
     dependencies:
       acorn: 6.4.2
       loose-envify: 1.4.0
       neo-async: 2.6.2
       object-assign: 4.1.1
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+      react: 17.0.2
+      react-dom: 17.0.2(react@17.0.2)
       webpack: 4.47.0
 
-  react@19.1.0: {}
+  react@17.0.2:
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
 
   readable-stream@2.3.8:
     dependencies:
@@ -6543,11 +6548,11 @@ snapshots:
     dependencies:
       redux: 4.2.0
 
-  redux-persist@6.0.0(react@19.1.0)(redux@4.2.0):
+  redux-persist@6.0.0(react@17.0.2)(redux@4.2.0):
     dependencies:
       redux: 4.2.0
     optionalDependencies:
-      react: 19.1.0
+      react: 17.0.2
 
   redux-thunk@2.4.1(redux@4.2.0):
     dependencies:
@@ -6677,7 +6682,10 @@ snapshots:
       immutable: 4.3.7
       source-map-js: 1.2.1
 
-  scheduler@0.26.0: {}
+  scheduler@0.20.2:
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
 
   schema-utils@1.0.0:
     dependencies:
@@ -6968,13 +6976,13 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  styled-jsx@5.0.0-beta.3(@babel/core@7.28.3)(react@19.1.0):
+  styled-jsx@5.0.0-beta.3(@babel/core@7.28.3)(react@17.0.2):
     dependencies:
       '@babel/plugin-syntax-jsx': 7.14.5(@babel/core@7.28.3)
       '@babel/types': 7.15.0
       convert-source-map: 1.7.0
       loader-utils: 1.2.3
-      react: 19.1.0
+      react: 17.0.2
       source-map: 0.7.3
       string-hash: 1.1.3
       stylis: 3.5.4
@@ -7227,14 +7235,14 @@ snapshots:
       punycode: 1.4.1
       qs: 6.14.0
 
-  use-subscription@1.5.1(react@19.1.0):
+  use-subscription@1.5.1(react@17.0.2):
     dependencies:
       object-assign: 4.1.1
-      react: 19.1.0
+      react: 17.0.2
 
-  use-sync-external-store@1.5.0(react@19.1.0):
+  use-sync-external-store@1.5.0(react@17.0.2):
     dependencies:
-      react: 19.1.0
+      react: 17.0.2
 
   use@3.1.1: {}
 

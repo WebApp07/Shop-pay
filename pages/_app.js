@@ -1,21 +1,30 @@
-import '../styles/globals.scss'
-import { Provider } from 'react-redux'
-import store from '../store'
-import { persistStore } from 'redux-persist'
-import { PersistGate } from 'redux-persist/lib/integration/react'
+import "../styles/globals.scss";
+import Head from "next/head";
+import { Provider } from "react-redux";
+import store from "../store";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/lib/integration/react";
 
-let persistor = persistStore(store)
+let persistor = persistStore(store);
 
 function MyApp({ Component, pageProps }) {
-
-
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+    <>
+      <Head>
+        <title>Shoppay</title>
+        <meta
+          name="description"
+          content="shoppay-online shopping service for all of your needs. "
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
           <Component {...pageProps} />
-      </PersistGate>
-    </Provider>
-  )
+        </PersistGate>
+      </Provider>
+    </>
+  );
 }
 
-export default MyApp
+export default MyApp;
