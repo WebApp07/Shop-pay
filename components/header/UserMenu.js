@@ -6,13 +6,13 @@ export default function UserMenu({ loggedIn }) {
     <div className={styles.menu}>
       <h4>Welcome to Shoppay!</h4>
       {loggedIn ? (
-        <div>
+        <div className={styles.flex}>
           <img
             src="https://as2.ftcdn.net/v2/jpg/03/64/21/11/1000_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg"
             alt=""
             className={styles.menu__img}
           />
-          <div>
+          <div className={styles.col}>
             <span>Welcome Back,</span>
             <h3>ZOUGUIG</h3>
             <span>Sign out</span>
