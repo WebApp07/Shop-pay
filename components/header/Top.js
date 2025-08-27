@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useState } from "react";
 import UserMenu from "./UserMenu";
 
-export default function Top() {
+export default function Top({ country, currency }) {
   const [loggdIn, setLoggedIn] = useState(true);
   const [visible, setVisible] = useState(false);
   return (
@@ -16,11 +16,10 @@ export default function Top() {
         <div></div>
         <ul className={styles.top__list}>
           <li className={styles.li}>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg"
-              alt=""
-            />
-            <span>Morocco / Usd</span>
+            <img src={country.flag} alt="" />
+            <span>
+              {country.name} / {currency.code} ({currency.symbol})
+            </span>
           </li>
 
           <li className={styles.li}>

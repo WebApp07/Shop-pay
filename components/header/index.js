@@ -2,15 +2,13 @@ import Ad from "./Ad";
 import styles from "./styles.module.scss";
 import Top from "./Top";
 import Main from "./Main";
-import Footer from "../footer";
 
-export default function Header() {
+export default function Header({ country, currency }) {
   return (
     <div className={styles.header}>
       <Ad />
-      <Top />
+      <Top country={country} currency={currency} />
       <Main />
-      <Footer />
     </div>
   );
 }
