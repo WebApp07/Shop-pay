@@ -6,6 +6,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Home({ country, currency }) {
   const { data: session } = useSession();
+  console.log(session);
 
   console.log("Country:", country);
   console.log("currency", currency);
