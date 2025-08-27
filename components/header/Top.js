@@ -6,10 +6,12 @@ import { RiArrowDropDownFill } from "react-icons/ri";
 import Link from "next/link";
 import { useState } from "react";
 import UserMenu from "./UserMenu";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Top({ country, currency }) {
-  const [loggdIn, setLoggedIn] = useState(true);
+  const { data: session } = useSession();
   const [visible, setVisible] = useState(false);
+
   return (
     <div className={styles.top}>
       <div className={styles.top__container}>
@@ -40,14 +42,11 @@ export default function Top({ country, currency }) {
             onMouseOver={() => setVisible(true)}
             onMouseLeave={() => setVisible(false)}
           >
-            {loggdIn ? (
+            {session ? (
               <li className={styles.li}>
                 <div className={styles.flex}>
-                  <img
-                    src="https://as2.ftcdn.net/v2/jpg/03/64/21/11/1000_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg"
-                    alt=""
-                  />
-                  <span>Amine</span>
+                  <img src={session.user.image} alt={session.user.image} />
+                  <span>{session.user.name}</span>
                   <RiArrowDropDownFill />
                 </div>
               </li>
@@ -60,7 +59,7 @@ export default function Top({ country, currency }) {
                 </div>
               </li>
             )}
-            {visible && <UserMenu loggedIn={true} />}
+            {visible && <UserMenu session={session} />}
           </li>
         </ul>
       </div>

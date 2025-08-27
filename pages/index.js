@@ -13,7 +13,7 @@ export default function Home({ country, currency }) {
 
   return (
     <div>
-      <Header country={country} currency={currency} />
+      <Header country={country} currency={currency} session={session} />
       <Footer country={country} currency={currency} />
 
       {session ? "You are logged in" : "sign in"}
