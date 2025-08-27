@@ -1,7 +1,10 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import clientPromise from "./lib/mongodb";
 
 export const authOptions = {
+  adapter: MongoDBAdapter(clientPromise),
   // Configure one or more authentication providers
   providers: [
     GithubProvider({
@@ -10,6 +13,14 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
+
+  pages: {
+    signIn: "/signin",
+  },
+  session: {
+    strategy: "jwt",
+  },
+  secret: process.env.JWT_SECRET,
 };
 
 export default NextAuth(authOptions);
