@@ -3,6 +3,8 @@ import Footer from "../components/footer";
 import styles from "../styles/signin.module.scss";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import Link from "next/link";
+import { Form, Formik } from "formik";
+import LoginInput from "../components/inputs/loginInput";
 
 export default function signin({ country, currency }) {
   return (
@@ -17,6 +19,17 @@ export default function signin({ country, currency }) {
             <span>
               We'd be happy to join us ! <Link href="/">Go Store</Link>
             </span>
+          </div>
+          <div className={styles.login__form}>
+            <h1>Sign in</h1>
+            <p>Get access to one of the best shopping services in world.</p>
+            <Formik>
+              {(form) => (
+                <Form>
+                  <LoginInput icon="email" placeholder="Email Address" />
+                </Form>
+              )}
+            </Formik>
           </div>
         </div>
       </div>
