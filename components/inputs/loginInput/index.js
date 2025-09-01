@@ -2,7 +2,7 @@ import { SiMinutemailer } from "react-icons/si";
 import styles from "./styles.module.scss";
 import { BiUser } from "react-icons/bi";
 import { IoKey } from "react-icons/io5";
-import { useField } from "formik";
+import { ErrorMessage, useField } from "formik";
 
 export default function LoginInput({ icon, placeholder, ...props }) {
   const [field, meta] = useField(props);
@@ -29,6 +29,13 @@ export default function LoginInput({ icon, placeholder, ...props }) {
         {...field}
         {...props}
       />
+
+      {meta.touched && meta.error && (
+        <div className={styles.error__popup}>
+          <span></span>
+          <ErrorMessage name={field.name} />
+        </div>
+      )}
     </div>
   );
 }

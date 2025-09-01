@@ -1,0 +1,52 @@
+.button {
+  position: relative;
+  border: none;
+  outline: none;
+  width: 220px;
+  height: 55px;
+  border-radius: 55px;
+  font-weight: 600;
+  color: #fff;
+  background: $blue-color;
+  display: block;
+  cursor: pointer;
+  transition: all 0.3s ease; // smooth everything
+
+  &:hover {
+    background: #fff;
+    color: $blue-color;
+    transform: translateY(-2px); // subtle lift
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+
+    .svg__wrap {
+      background: lighten($grey-color, 10%); // lighter on hover
+      svg {
+        fill: $blue-color;
+        transform: scale(1.1); // svg zooms slightly
+      }
+    }
+  }
+
+  &:active {
+    transform: translateY(0); // reset when pressed
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .svg__wrap {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 7.5px;
+    right: 5px;
+    background: $grey-color;
+    transition: all 0.3s ease; // smooth bg + scale
+
+    svg {
+      fill: $blue-color;
+      transition: all 0.3s ease;
+    }
+  }
+}
