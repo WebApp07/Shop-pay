@@ -8,15 +8,31 @@ import * as Yup from "yup";
 import LoginInput from "../components/inputs/loginInput";
 import { useState } from "react";
 import CircledIconBtn from "../components/buttons/circledIconBtn";
+import { getProviders, signIn } from "next-auth/react";
 
 const initialValues = {
   login_email: "",
   login_password: "",
+  full_name: "",
+  email: "",
+  password: "",
+  confirm_password: "",
 };
 
-export default function signin({ country, currency }) {
+// Regex for full name: letters and spaces only
+const fullNameRegex = /^[a-zA-Z\s]+$/;
+
+export default function signin({ country, currency, providers }) {
+  console.log(providers);
   const [user, setUser] = useState(initialValues);
-  const { login_email, login_password } = user;
+  const {
+    login_email,
+    login_password,
+    full_name,
+    email,
+    password,
+    confirm_password,
+  } = user;
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
@@ -27,6 +43,22 @@ export default function signin({ country, currency }) {
       .required("Email address is required.")
       .email("Please enter a valid email address."),
     login_password: Yup.string().required("Please enter a password."),
+  });
+
+  const registerValidation = Yup.object({
+    full_name: Yup.string()
+      .matches(fullNameRegex, "Full name can only contain letters and spaces")
+      .required("Full name is required"),
+    email: Yup.string()
+      .required("Email address is required.")
+      .email("Please enter a valid email address."),
+
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters")
+      .required("Please enter a password."),
+    confirm_password: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required("Confirm your password"),
   });
   return (
     <>
@@ -43,7 +75,10 @@ export default function signin({ country, currency }) {
           </div>
           <div className={styles.login__form}>
             <h1>Sign in</h1>
-            <p>Get access to one of the best shopping services in world.</p>
+            <p>
+              Welcome back! Access your account and enjoy a seamless shopping
+              experience.
+            </p>
             <Formik
               enableReinitialize
               initialValues={{
@@ -76,6 +111,79 @@ export default function signin({ country, currency }) {
                 </Form>
               )}
             </Formik>
+            <div className={styles.login__socials}>
+              <span className={styles.or}>Or continue with</span>
+              <div className={styles.login__socials_wrap}>
+                {providers.map((provider) => (
+                  <div key={provider.name}>
+                    <button
+                      className={styles.socials__btn}
+                      onClick={() => signIn(provider.id)}
+                    >
+                      <img src={`../../icons/${provider.name}.png`} alt="" />
+                      Sign in with {provider.name}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={styles.login__container}>
+          <div className={styles.login__form}>
+            <h1>Sign up</h1>
+            <p>
+              Join us today and enjoy a seamless shopping experience with
+              exclusive products.
+            </p>
+
+            <Formik
+              enableReinitialize
+              initialValues={{
+                full_name,
+                email,
+                password,
+                confirm_password,
+              }}
+              validationSchema={registerValidation}
+            >
+              {(form) => (
+                <Form>
+                  <LoginInput
+                    type="text"
+                    icon="user"
+                    name="full_name"
+                    placeholder="Full Name"
+                    onChange={handleChange}
+                  />
+
+                  <LoginInput
+                    type="email"
+                    icon="email"
+                    name="email"
+                    placeholder="email address"
+                    onChange={handleChange}
+                  />
+
+                  <LoginInput
+                    type="password"
+                    icon="password"
+                    name="password"
+                    placeholder="enter password"
+                    onChange={handleChange}
+                  />
+
+                  <LoginInput
+                    type="password"
+                    icon="password"
+                    name="confirm_password"
+                    placeholder="Confirm password"
+                    onChange={handleChange}
+                  />
+                  <CircledIconBtn type="submit" text="Sign up" />
+                </Form>
+              )}
+            </Formik>
           </div>
         </div>
       </div>
@@ -84,8 +192,8 @@ export default function signin({ country, currency }) {
   );
 }
 
-// Fetch country/currency for this page
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  // Fetch country & currency
   const res = await fetch(
     "https://api.ipregistry.co/66.165.2.7?key=ira_Q2qx7fq6i5zv9a0kAE4JoEfHkJd4No0Klibp"
   );
@@ -101,5 +209,14 @@ export async function getServerSideProps() {
     symbol: data.currency?.symbol || "$",
   };
 
-  return { props: { country, currency } };
+  // Fetch providers for sign in
+  const providers = Object.values(await getProviders());
+
+  return {
+    props: {
+      country,
+      currency,
+      providers,
+    },
+  };
 }
