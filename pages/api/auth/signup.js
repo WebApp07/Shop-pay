@@ -43,19 +43,13 @@ handler.post(async (req, res) => {
     const cryptedPassword = await bcrypt.hash(password, 12);
     const newUser = new User({ name, email, password: cryptedPassword });
     const addedUser = await newUser.save();
-    res.send(addedUser);
 
     const activation_token = createActivationToken({
       id: addedUser._id.toString(),
     });
 
-    res.status(201).json({
-      message: "User created successfully",
-      activation_token,
-    });
-
-    console.log("User created:", addedUser);
-    console.log("Activation token:", activation_token);
+    const url = `${process.env.BASE_URL}/activate/${activation_token}`;
+    res.send(url);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

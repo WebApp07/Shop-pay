@@ -1,3 +1,5 @@
+import jwt from "jsonwebtoken";
+
 export const createActivationToken = (payload) => {
   console.log("SECRET:", process.env.ACTIVATION_TOKEN_SECRET);
 
