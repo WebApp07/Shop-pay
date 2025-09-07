@@ -9,29 +9,35 @@ import LoginInput from "../components/inputs/loginInput";
 import { useState } from "react";
 import CircledIconBtn from "../components/buttons/circledIconBtn";
 import { getProviders, signIn } from "next-auth/react";
+import axios from "axios";
 
 const initialValues = {
   login_email: "",
   login_password: "",
-  full_name: "",
+  name: "",
   email: "",
   password: "",
   confirm_password: "",
+  success: "",
+  error: "",
 };
 
 // Regex for full name: letters and spaces only
 const fullNameRegex = /^[a-zA-Z\s]+$/;
 
 export default function signin({ country, currency, providers }) {
-  console.log(providers);
+  //console.log(providers);
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(initialValues);
   const {
     login_email,
     login_password,
-    full_name,
+    name,
     email,
     password,
     confirm_password,
+    success,
+    error,
   } = user;
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,7 +52,7 @@ export default function signin({ country, currency, providers }) {
   });
 
   const registerValidation = Yup.object({
-    full_name: Yup.string()
+    name: Yup.string()
       .matches(fullNameRegex, "Full name can only contain letters and spaces")
       .required("Full name is required"),
     email: Yup.string()
@@ -60,6 +66,24 @@ export default function signin({ country, currency, providers }) {
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm your password"),
   });
+
+  const signUpHandler = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.post("/api/auth/signup", {
+        name,
+        email,
+        password,
+      });
+      setUser({ ...user, error: "", success: data.message });
+
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setUser({ ...user, success: "", error: error.response.data.message });
+    }
+  };
+
   return (
     <>
       <Header country={country} currency={currency} />
@@ -140,19 +164,22 @@ export default function signin({ country, currency, providers }) {
             <Formik
               enableReinitialize
               initialValues={{
-                full_name,
+                name,
                 email,
                 password,
                 confirm_password,
               }}
               validationSchema={registerValidation}
+              onSubmit={() => {
+                signUpHandler();
+              }}
             >
               {(form) => (
                 <Form>
                   <LoginInput
                     type="text"
                     icon="user"
-                    name="full_name"
+                    name="name"
                     placeholder="Full Name"
                     onChange={handleChange}
                   />
@@ -184,6 +211,8 @@ export default function signin({ country, currency, providers }) {
                 </Form>
               )}
             </Formik>
+            <div>{success && <span>{success}</span>}</div>
+            <div>{error && <span>{error}</span>}</div>
           </div>
         </div>
       </div>
