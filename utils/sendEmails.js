@@ -18,6 +18,17 @@ const oauth2Client = new OAuth2(
   OAUTH_PLAYGROUND
 );
 
+console.log("CLIENT_ID:", MAILING_SERVICE_CLIENT_ID);
+console.log(
+  "CLIENT_SECRET:",
+  MAILING_SERVICE_CLIENT_SECRET ? "exists" : "missing"
+);
+console.log(
+  "REFRESH_TOKEN:",
+  MAILING_SERVICE_REFRESH_TOKEN ? "exists" : "missing"
+);
+console.log("SENDER_EMAIL:", SENDER_EMAIL_ADDRESS);
+
 //send email
 
 export const sendEmail = (to, url, txt, subject, template) => {
