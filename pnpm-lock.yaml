@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@auth/mongodb-adapter':
         specifier: ^3.10.0
-        version: 3.10.0(mongodb@4.8.0)
+        version: 3.10.0(mongodb@4.8.0)(nodemailer@7.0.6)
       '@reduxjs/toolkit':
         specifier: 1.8.3
         version: 1.8.3(react-redux@8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(redux@4.2.0))(react@17.0.2)
@@ -40,13 +40,16 @@ importers:
         version: 12.0.1(@babel/core@7.28.3)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(sass@1.53.0)(webpack@4.47.0)
       next-auth:
         specifier: 4.10.3
-        version: 4.10.3(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
+        version: 4.10.3(nodemailer@7.0.6)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
       next-connect:
         specifier: 0.13.0
         version: 0.13.0
       next-redux-wrapper:
         specifier: 7.0.5
         version: 7.0.5(next@12.0.1(@babel/core@7.28.3)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(sass@1.53.0)(webpack@4.47.0))(react-redux@8.0.2(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(redux@4.2.0))(react@17.0.2)
+      nodemailer:
+        specifier: ^7.0.6
+        version: 7.0.6
       react:
         specifier: 17.0.2
         version: 17.0.2
@@ -2651,6 +2654,10 @@ packages:
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
 
+  nodemailer@7.0.6:
+    resolution: {integrity: sha512-F44uVzgwo49xboqbFgBGkRaiMgtoBrBEWCVincJPK9+S9Adkzt/wXCLKbf7dxucmxfTI5gHGB+bEmdyzN6QKjw==}
+    engines: {node: '>=6.0.0'}
+
   normalize-path@2.1.1:
     resolution: {integrity: sha512-3pKJwH184Xo/lnH6oyP1q2pMd7HcypqqmRs91/6/i2CGtWwIKGCkOOMTm/zXbgTEWHw1uNpNi/igc3ePOYHb6w==}
     engines: {node: '>=0.10.0'}
@@ -3773,17 +3780,19 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.30
 
-  '@auth/core@0.40.0':
+  '@auth/core@0.40.0(nodemailer@7.0.6)':
     dependencies:
       '@panva/hkdf': 1.2.1
       jose: 6.0.13
       oauth4webapi: 3.7.0
       preact: 10.24.3
       preact-render-to-string: 6.5.11(preact@10.24.3)
+    optionalDependencies:
+      nodemailer: 7.0.6
 
-  '@auth/mongodb-adapter@3.10.0(mongodb@4.8.0)':
+  '@auth/mongodb-adapter@3.10.0(mongodb@4.8.0)(nodemailer@7.0.6)':
     dependencies:
-      '@auth/core': 0.40.0
+      '@auth/core': 0.40.0(nodemailer@7.0.6)
       mongodb: 4.8.0
     transitivePeerDependencies:
       - '@simplewebauthn/browser'
@@ -6664,7 +6673,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next-auth@4.10.3(react-dom@17.0.2(react@17.0.2))(react@17.0.2):
+  next-auth@4.10.3(nodemailer@7.0.6)(react-dom@17.0.2(react@17.0.2))(react@17.0.2):
     dependencies:
       '@babel/runtime': 7.28.3
       '@panva/hkdf': 1.2.1
@@ -6677,6 +6686,8 @@ snapshots:
       react: 17.0.2
       react-dom: 17.0.2(react@17.0.2)
       uuid: 8.3.2
+    optionalDependencies:
+      nodemailer: 7.0.6
 
   next-connect@0.13.0:
     dependencies:
@@ -6804,6 +6815,8 @@ snapshots:
   node-releases@1.1.77: {}
 
   node-releases@2.0.19: {}
+
+  nodemailer@7.0.6: {}
 
   normalize-path@2.1.1:
     dependencies:
