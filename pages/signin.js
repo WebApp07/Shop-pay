@@ -10,6 +10,8 @@ import { useState } from "react";
 import CircledIconBtn from "../components/buttons/circledIconBtn";
 import { getProviders, signIn } from "next-auth/react";
 import axios from "axios";
+import DotLoaderSpinner from "../components/loaders/dotLoader";
+import Router from "next/router";
 
 const initialValues = {
   login_email: "",
@@ -76,8 +78,10 @@ export default function signin({ country, currency, providers }) {
         password,
       });
       setUser({ ...user, error: "", success: data.message });
-
       setLoading(false);
+      setTimeout(() => {
+        Router.push("/");
+      }, 2000);
     } catch (error) {
       setLoading(false);
       setUser({ ...user, success: "", error: error.response.data.message });
@@ -86,6 +90,8 @@ export default function signin({ country, currency, providers }) {
 
   return (
     <>
+      {loading && <DotLoaderSpinner loading={loading} />}
+
       <Header country={country} currency={currency} />
       <div className={styles.login}>
         <div className={styles.login__container}>
@@ -211,8 +217,10 @@ export default function signin({ country, currency, providers }) {
                 </Form>
               )}
             </Formik>
-            <div>{success && <span>{success}</span>}</div>
-            <div>{error && <span>{error}</span>}</div>
+            <div className={styles.sucess}>
+              {success && <span>{success}</span>}
+            </div>
+            <div className={styles.error}>{error && <span>{error}</span>}</div>
           </div>
         </div>
       </div>
