@@ -22,6 +22,7 @@ const initialValues = {
   confirm_password: "",
   success: "",
   error: "",
+  login_error: "",
 };
 
 // Regex for full name: letters and spaces only
@@ -40,6 +41,7 @@ export default function signin({ country, currency, providers }) {
     confirm_password,
     success,
     error,
+    login_error,
   } = user;
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,12 +81,36 @@ export default function signin({ country, currency, providers }) {
       });
       setUser({ ...user, error: "", success: data.message });
       setLoading(false);
-      setTimeout(() => {
+      setTimeout(async () => {
+        let options = {
+          redirect: false,
+          email: email,
+          password: login_password,
+        };
+        const res = await signIn("credentials", options);
         Router.push("/");
       }, 2000);
     } catch (error) {
       setLoading(false);
       setUser({ ...user, success: "", error: error.response.data.message });
+    }
+  };
+
+  const signInHandler = async () => {
+    setLoading(true);
+    let options = {
+      redirect: false,
+      email: login_email,
+      password: login_password,
+    };
+    const res = await signIn("credentials", options);
+    setUser({ ...user, success: "", error: "" });
+    setLoading(false);
+    if (res?.error) {
+      setLoading(false);
+      setUser({ ...user, login_error: res?.error });
+    } else {
+      return Router.push("/");
     }
   };
 
@@ -116,6 +142,9 @@ export default function signin({ country, currency, providers }) {
                 login_password,
               }}
               validationSchema={loginValidation}
+              onSubmit={() => {
+                signInHandler();
+              }}
             >
               {(form) => (
                 <Form>
@@ -135,6 +164,9 @@ export default function signin({ country, currency, providers }) {
                     onChange={handleChange}
                   />
                   <CircledIconBtn type="submit" text="Sign in" />
+                  {login_error && (
+                    <span className={styles.error}>{login_error}</span>
+                  )}
                   <div className={styles.forget}>
                     <Link href="/forget">Forget Password ?</Link>
                   </div>

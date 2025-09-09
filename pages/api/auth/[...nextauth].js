@@ -6,11 +6,36 @@ import TwitterProvider from "next-auth/providers/twitter";
 import Auth0Provider from "next-auth/providers/auth0";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "./lib/mongodb";
+import CredentialsProvider from "next-auth/providers/credentials";
+import User from "../../../models/User";
+import db from "../../../utils/db";
+import bcrypt from "bcryptjs";
 
+db.connectDb();
 export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
-  // Configure one or more authentication providers
   providers: [
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials, req) {
+        const email = credentials.email;
+        const password = credentials.password;
+        const user = await User.findOne({ email });
+
+        if (user) {
+          return signInUser({ password, user });
+        } else {
+          throw new Error(
+            "No account found with this email. Please sign up first."
+          );
+        }
+      },
+    }),
+
     FacebookProvider({
       clientId: process.env.FACEBOOK_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
@@ -44,6 +69,18 @@ export const authOptions = {
     strategy: "jwt",
   },
   secret: process.env.JWT_SECRET,
+};
+
+const signInUser = async ({ password, user }) => {
+  if (!user.password) {
+    ("This account was created using a social login (Google, Facebook, etc.). Please sign in with that provider instead.");
+  }
+
+  const testPassword = await bcrypt.compare(password, user.password);
+  if (!testPassword) {
+    throw new Error("Invalid email or password. Please try again.");
+  }
+  return user;
 };
 
 export default NextAuth(authOptions);
