@@ -21,9 +21,10 @@ export const authOptions = {
         username: { label: "Username", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const email = credentials.email;
         const password = credentials.password;
+        console.log(email, password);
         const user = await User.findOne({ email });
 
         if (user) {
@@ -60,6 +61,16 @@ export const authOptions = {
       issuer: process.env.AUTH0_ISSUER,
     }),
   ],
+
+  callbacks: {
+    async session({ session, token }) {
+      const user = await User.findById(token.sub).select("-password");
+      session.user.id = user._id;
+      session.user.role = user.role;
+      session.user.image = user.image;
+      return session;
+    },
+  },
 
   pages: {
     signIn: "/signin",
