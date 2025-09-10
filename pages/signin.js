@@ -26,8 +26,8 @@ const initialValues = {
 };
 
 // Regex for full name: letters and spaces only
-const fullNameRegex = /^[a-zA-Z\s]+$/;
-
+// Allows letters (including accented), spaces, and common name characters like hyphens and apostrophes
+const fullNameRegex = /^[\p{L}]+(?:[\s'-][\p{L}]+)*$/u;
 export default function signin({ country, currency, providers }) {
   //console.log(providers);
   const [loading, setLoading] = useState(false);
