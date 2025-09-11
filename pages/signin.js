@@ -8,7 +8,12 @@ import * as Yup from "yup";
 import LoginInput from "../components/inputs/loginInput";
 import { useState } from "react";
 import CircledIconBtn from "../components/buttons/circledIconBtn";
-import { getProviders, signIn } from "next-auth/react";
+import {
+  getCsrfToken,
+  getProviders,
+  getSession,
+  signIn,
+} from "next-auth/react";
 import axios from "axios";
 import DotLoaderSpinner from "../components/loaders/dotLoader";
 import Router from "next/router";
@@ -26,8 +31,8 @@ const initialValues = {
 };
 
 // Regex for full name: letters and spaces only
-// Allows letters (including accented), spaces, and common name characters like hyphens and apostrophes
-const fullNameRegex = /^[\p{L}]+(?:[\s'-][\p{L}]+)*$/u;
+const fullNameRegex = /^[a-zA-Z\s]+$/;
+
 export default function signin({ country, currency, providers }) {
   //console.log(providers);
   const [loading, setLoading] = useState(false);
@@ -110,7 +115,7 @@ export default function signin({ country, currency, providers }) {
       setLoading(false);
       setUser({ ...user, login_error: res?.error });
     } else {
-      return Router.push("/");
+      return Router.push(callbackUrl || "/");
     }
   };
 
@@ -147,7 +152,12 @@ export default function signin({ country, currency, providers }) {
               }}
             >
               {(form) => (
-                <Form>
+                <Form method="post" action="/api/auth/signin/email">
+                  <input
+                    type="hidden"
+                    name="csrfToken"
+                    defaultValue={csrfToken}
+                  />
                   <LoginInput
                     type="email"
                     icon="email"
@@ -176,17 +186,23 @@ export default function signin({ country, currency, providers }) {
             <div className={styles.login__socials}>
               <span className={styles.or}>Or continue with</span>
               <div className={styles.login__socials_wrap}>
-                {providers.map((provider) => (
-                  <div key={provider.name}>
-                    <button
-                      className={styles.socials__btn}
-                      onClick={() => signIn(provider.id)}
-                    >
-                      <img src={`../../icons/${provider.name}.png`} alt="" />
-                      Sign in with {provider.name}
-                    </button>
-                  </div>
-                ))}
+                {providers.map((provider) => {
+                  if (provider.name == "Credentials") {
+                    return;
+                  }
+
+                  return (
+                    <div key={provider.name}>
+                      <button
+                        className={styles.socials__btn}
+                        onClick={() => signIn(provider.id)}
+                      >
+                        <img src={`../../icons/${provider.name}.png`} alt="" />
+                        Sign in with {provider.name}
+                      </button>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -262,6 +278,22 @@ export default function signin({ country, currency, providers }) {
 }
 
 export async function getServerSideProps(context) {
+  const { req, query } = context;
+
+  const session = await getSession({ req }); // checks whether the incoming request already has a valid session (user logged in).
+  const { callbackUrl } = query; //Grabs the callbackUrl param from the URL so you know where to redirect after sign in.
+
+  if (session) {
+    // If the user is already logged in, there’s no point showing the sign-in page. This returns a redirect response so the server redirects the visitor immediately.
+    return {
+      redirect: {
+        destination: callbackUrl,
+      },
+    };
+  }
+
+  const csrfToken = await getCsrfToken(context);
+
   // Fetch country & currency
   const res = await fetch(
     "https://api.ipregistry.co/66.165.2.7?key=ira_Q2qx7fq6i5zv9a0kAE4JoEfHkJd4No0Klibp"
@@ -286,6 +318,8 @@ export async function getServerSideProps(context) {
       country,
       currency,
       providers,
+      csrfToken,
+      callbackUrl,
     },
   };
 }
