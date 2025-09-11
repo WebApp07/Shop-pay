@@ -33,7 +33,13 @@ const initialValues = {
 // Regex for full name: letters and spaces only
 const fullNameRegex = /^[a-zA-Z\s]+$/;
 
-export default function signin({ country, currency, providers }) {
+export default function signin({
+  country,
+  currency,
+  providers,
+  csrfToken,
+  callbackUrl,
+}) {
   //console.log(providers);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(initialValues);
