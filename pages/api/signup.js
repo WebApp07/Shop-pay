@@ -1,10 +1,10 @@
 import nc from "next-connect";
-import db from "../../../utils/db";
-import { validateEmail } from "../../../utils/validation";
-import User from "../../../models/User";
+import db from "../../utils/db";
+import { validateEmail } from "../../utils/validation";
+import User from "../../models/User";
 import bcrypt from "bcryptjs";
-import { createActivationToken } from "../../../utils/tokens";
-import { sendEmail } from "../../../utils/sendEmails";
+import { createActivationToken } from "../../utils/tokens";
+import { sendEmail } from "../../utils/sendEmails";
 
 const handler = nc();
 
