@@ -183,8 +183,8 @@ export default function signin({
                   {login_error && (
                     <span className={styles.error}>{login_error}</span>
                   )}
-                  <div className={styles.forget}>
-                    <Link href="/auth/forget">Forget Password ?</Link>
+                  <div className={styles.forgot}>
+                    <Link href="/auth/forgot">forgot Password ?</Link>
                   </div>
                 </Form>
               )}

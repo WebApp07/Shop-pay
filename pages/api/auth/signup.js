@@ -1,10 +1,11 @@
 import nc from "next-connect";
-import db from "../../utils/db";
-import { validateEmail } from "../../utils/validation";
-import User from "../../models/User";
+import db from "../../../utils/db";
+import { validateEmail } from "../../../utils/validation";
+import User from "../../../models/User";
 import bcrypt from "bcryptjs";
-import { createActivationToken } from "../../utils/tokens";
-import { sendEmail } from "../../utils/sendEmails";
+import { createActivationToken } from "../../../utils/tokens";
+import { sendEmail } from "../../../utils/sendEmails";
+import { activateEmailTemplate } from "../../../emails/activateemailtemplate";
 
 const handler = nc();
 
@@ -50,7 +51,7 @@ handler.post(async (req, res) => {
     });
 
     const url = `${process.env.BASE_URL}/activate/${activation_token}`;
-    sendEmail(email, url, "", "Activate your account.");
+    sendEmail(email, url, "", "Activate your account.", activateEmailTemplate);
     await db.disconnectDb();
     res.json({
       message:

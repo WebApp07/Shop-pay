@@ -1,6 +1,6 @@
 import { BiLeftArrowAlt } from "react-icons/bi";
 import Header from "../../components/header";
-import styles from "../../styles/forget.module.scss";
+import styles from "../../styles/forgot.module.scss";
 import Link from "next/link";
 import Footer from "../../components/footer";
 import { Form, Formik } from "formik";
@@ -8,8 +8,10 @@ import CircledIconBtn from "../../components/buttons/circledIconBtn";
 import LoginInput from "../../components/inputs/loginInput";
 import { useState } from "react";
 import * as Yup from "yup";
+import axios from "axios";
+import DotLoaderSpinner from "../../components/loaders/dotLoader";
 
-export default function forget({ country, currency }) {
+export default function forgot({ country, currency }) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -19,18 +21,36 @@ export default function forget({ country, currency }) {
       .required("Email address is required.")
       .email("Please enter a valid email address."),
   });
-  const forgetHandler = async () => {};
+  const forgotHandler = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.post("/api/auth/forgot", {
+        email,
+      });
+      setError("");
+      setSuccess(data.message);
+      setEmail("");
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setSuccess("");
+      setError(error.response.data.message);
+    }
+  };
 
   return (
     <>
+      {loading && <DotLoaderSpinner loading={loading} />}
+
       <Header country={country} currency={currency} />
-      <div className={styles.forget}>
-        <div className={styles.forget__header}>
+      <div className={styles.forgot}>
+        <div className={styles.forgot__header}>
           <div className={styles.back__svg}>
             <BiLeftArrowAlt />
           </div>
           <span>
-            Forget your password! <Link href="/">Return to login</Link>
+            forgot your password!{" "}
+            <Link href="/auth/forgot">Return to login</Link>
           </span>
         </div>
         <Formik
@@ -54,7 +74,7 @@ export default function forget({ country, currency }) {
               />
 
               <CircledIconBtn type="submit" text="send link" />
-              <div>
+              <div style={{ marginTop: "10px" }}>
                 {error && <span className={styles.error}>{error}</span>}
                 {success && <span className={styles.sucess}>{success}</span>}
               </div>
