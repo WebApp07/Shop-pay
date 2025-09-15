@@ -14,8 +14,8 @@ import { getSession, signIn } from "next-auth/react";
 import jwt from "jsonwebtoken";
 import { Router } from "next/router";
 
-export default function reset({ country, currency, token }) {
-  console.log("token", token);
+export default function reset({ country, currency, user_id }) {
+  console.log("user_id", user_id);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -25,13 +25,29 @@ export default function reset({ country, currency, token }) {
     password: Yup.string()
       .min(6, "Password must be at least 6 characters")
       .required("Please enter your new password."),
-    confirm_password: Yup.string()
+    confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm your password"),
   });
   const resetHandler = async () => {
     try {
-    } catch (error) {}
+      setLoading(true);
+      const { data } = await axios.put("/api/auth/reset", {
+        user_id,
+        password,
+      });
+      let options = {
+        redirect: false,
+        email: data.email,
+        password: password,
+      };
+      await signIn("credentials", options);
+      window.location.reload(true);
+    } catch (error) {
+      setLoading(false);
+      setSuccess("");
+      setError(error.response.data.message);
+    }
   };
 
   return (
@@ -72,7 +88,7 @@ export default function reset({ country, currency, token }) {
               <LoginInput
                 type="password"
                 icon="password"
-                name="password"
+                name="confirmPassword"
                 placeholder="Confirm Password"
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
@@ -80,7 +96,6 @@ export default function reset({ country, currency, token }) {
               <CircledIconBtn type="submit" text="Submit" />
               <div style={{ marginTop: "10px" }}>
                 {error && <span className={styles.error}>{error}</span>}
-                {success && <span className={styles.sucess}>{success}</span>}
               </div>
             </Form>
           )}
@@ -92,8 +107,17 @@ export default function reset({ country, currency, token }) {
 }
 
 export async function getServerSideProps(context) {
-  const { query } = context;
+  const { query, req } = context;
+  const session = await getSession({ req });
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+      },
+    };
+  }
   const token = query.token;
+  const user_id = jwt.verify(token, process.env.RESET_TOKEN_SECRET);
 
   // Fetch country & currency
   const res = await fetch(
@@ -115,7 +139,7 @@ export async function getServerSideProps(context) {
     props: {
       country,
       currency,
-      token,
+      user_id: user_id.id,
     },
   };
 }
