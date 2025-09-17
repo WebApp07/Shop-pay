@@ -1,11 +1,12 @@
 import styles from "./styles.module.scss"
+import MainSwiper from "./swiper"
 export default function Main() {
   return (
 
     <div className={styles.main}>
         <div className={styles.header}>Header</div>
         <div className={styles.menu}>menu</div>
-        <div className={styles.swiper}>swiper</div>
+        <MainSwiper />
         <div className={styles.offres}>offres</div>
         <div className={styles.user}>user</div>
     </div>
