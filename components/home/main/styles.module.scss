@@ -9,13 +9,10 @@
 
     .menu {
         grid-area: menu;
-        height: 560px;
+        height: 580px;
         background: #fff;
         border-radius: 10px;
         box-shadow: $shadow-1;
-
-
-
 
     }
     .header {
@@ -25,63 +22,34 @@
         border-radius: 10px;
         box-shadow: $shadow-1;
     }
+
+    .swiper {
+        grid-area: swiper;
+        height: 300px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: $shadow-1;
+    }
+
+    .offers {
+        grid-area: offers;
+        overflow: hidden;
+        height: 220px;
+        background: #ffff;
+        border-radius: 10px;
+        box-shadow: $shadow-1;
+        background-image: url("../../../public/images/flash.webp");
+        background-position: -275px -135px;
+        background-size: cover;
+
+    }
+
+    .user {
+        grid-area: user;
+        height: 530px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: $shadow-1;
+    }
 }
-
-.swiper {
-    #app {
-  height: 100%;
-}
-html,
-body {
-  position: relative;
-  height: 100%;
-}
-
-body {
-  background: #000;
-  font-family:
-    Helvetica Neue,
-    Helvetica,
-    Arial,
-    sans-serif;
-  font-size: 14px;
-  color: #fff;
-  margin: 0;
-  padding: 0;
-}
-
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #444;
-
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.swiper {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-}
-
-.mainSwiper {
-
-}
-
 
