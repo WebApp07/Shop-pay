@@ -137,7 +137,7 @@ export default function signin({
               <BiLeftArrowAlt />
             </div>
             <span>
-              We'd be happy to join us ! <Link href="/">Go Store</Link>
+              We&apos;d be happy to join us ! <Link href="/">Go Store</Link>
             </span>
           </div>
           <div className={styles.login__form}>
