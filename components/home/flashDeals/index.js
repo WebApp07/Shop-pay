@@ -17,7 +17,7 @@ export default function FlashDeals() {
         <span className={styles.flashDeals__title}>
           FLASH SALE <MdFlashOn />
         </span>
-        <CountDown />
+        <CountDown date={new Date(2025, 9, 19)} />
       </div>
 
       {/* Swiper Slider */}
