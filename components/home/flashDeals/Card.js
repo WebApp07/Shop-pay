@@ -10,7 +10,7 @@ export default function FlashCard({ product }) {
 
   return (
     <div className={styles.card}>
-      {/* Product Image + Discount */}
+      {/* Image and discount */}
       <div className={styles.card__img}>
         <Link href={product.link || "#"}>
           <img src={product.image} alt="Product" />
@@ -24,7 +24,7 @@ export default function FlashCard({ product }) {
       {/* Prices */}
       <div className={styles.card__price}>
         <span>USD {discountedPrice}$</span>
-        <span className={styles.oldPrice}>USD {price.toFixed(2)}$</span>
+        <span>USD {price.toFixed(2)}$</span>
       </div>
 
       {/* Sold bar */}
@@ -34,7 +34,7 @@ export default function FlashCard({ product }) {
           style={{ width: `${product.sold}%` }}
         ></div>
       </div>
-      <div className={styles.card__percentage}>{product.sold}% Sold</div>
+      <div className={styles.card__percentage}>{product.sold}%</div>
     </div>
   );
 }
