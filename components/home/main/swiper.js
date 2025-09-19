@@ -1,17 +1,16 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable @next/next/no-img-element */
-import  { useRef, useState } from 'react';
+import { useRef, useState } from "react";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 // import required modules
-import { Pagination, Navigation, Autoplay} from 'swiper';
+import { Pagination, Navigation, Autoplay } from "swiper";
 
 export default function MainSwiper() {
   return (
@@ -24,27 +23,18 @@ export default function MainSwiper() {
           clickable: true,
         }}
         autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
+          delay: 2500,
+          disableOnInteraction: false,
         }}
         navigation={true}
         modules={[Pagination, Navigation, Autoplay]}
         className="mainSwiper"
       >
-
-        {
-
-            [...Array(10).keys()].map((i) => (
-                <SwiperSlide>
-                    <img src={`../../../images/swiper/${i + 1}.jpg`} alt='' />
-                </SwiperSlide>
-            ))
-          
-
-        }
-
-      
-    
+        {[...Array(10).keys()].map((i) => (
+          <SwiperSlide>
+            <img src={`../../../images/swiper/${i + 1}.jpg`} alt="" />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   );
