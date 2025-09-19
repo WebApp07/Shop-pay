@@ -1,9 +1,6 @@
-/* eslint-disable react/jsx-key */
+import Link from "next/link";
 import styles from "./styles.module.scss";
 import { menuArray } from "../../../data/home";
-import Link from "next/link";
-
-// Import icons
 import {
   GiLargeDress,
   GiClothes,
@@ -22,53 +19,52 @@ import { HiOutlineHome } from "react-icons/hi";
 import { AiOutlineSecurityScan } from "react-icons/ai";
 import { BsPhoneVibrate } from "react-icons/bs";
 
-// Array of icons mapped by index
-const icons = [
-  GiLargeDress, // 0
-  GiClothes, // 1
-  GiHeadphones, // 2
-  GiWatch, // 3
-  HiOutlineHome, // 4
-  GiHealthCapsule, // 5
-  GiBallerinaShoes, // 6
-  GiBigDiamondRing, // 7
-  GiSportMedal, // 8
-  FaBaby, // 9
-  BiCameraMovie, // 10
-  MdOutlineSportsEsports, // 11
-  BsPhoneVibrate, // 12
-  MdOutlineSmartToy, // 13
-  BiGift, // 14
-  Gi3DHammer, // 15
-  AiOutlineSecurityScan, // 16
-];
-
 export default function Menu() {
+  // Array of icons in the same order as menuArray
+  const icons = [
+    GiLargeDress,
+    GiClothes,
+    GiHeadphones,
+    GiWatch,
+    HiOutlineHome,
+    GiHealthCapsule,
+    GiBallerinaShoes,
+    GiBigDiamondRing,
+    GiSportMedal,
+    FaBaby,
+    BiCameraMovie,
+    MdOutlineSportsEsports,
+    BsPhoneVibrate,
+    MdOutlineSmartToy,
+    BiGift,
+    Gi3DHammer,
+    AiOutlineSecurityScan,
+  ];
+
   return (
     <div className={styles.menu}>
       <ul>
-        {/* Header */}
-        <li>
-          <a className={styles.menu__header}>
-            <BiCategory />
-            <b>Categories</b>
-          </a>
+        {/* Categories header */}
+        <li className={styles.menu__header}>
+          <BiCategory />
+          <b>Categories</b>
         </li>
 
-        {/* Categories list */}
-        {menuArray.map((item, i) => {
-          const Icon = icons[i] || null;
-          return (
-            <li key={i} className={styles.menu__list}>
-              <Link href={item.link}>
-                <a>
-                  {Icon && <Icon />}
-                  <span>{item.name}</span>
-                </a>
-              </Link>
-            </li>
-          );
-        })}
+        <div className={styles.menu__list}>
+          {menuArray.map((item, i) => {
+            const Icon = icons[i]; // pick icon by index
+            return (
+              <li key={item.name}>
+                <Link href={item.link}>
+                  <a>
+                    {Icon && <Icon />}
+                    <span>{item.name}</span>
+                  </a>
+                </Link>
+              </li>
+            );
+          })}
+        </div>
       </ul>
     </div>
   );

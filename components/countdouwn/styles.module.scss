@@ -1,0 +1,22 @@
+.countdown {
+  display: flex;
+  align-items: center;
+  gap: 4px; // spacing between digits/colons
+  font-size: 18px; // slightly smaller than the "FLASH SALE"
+  font-weight: 600;
+  color: #fff;
+
+  span {
+    background: #000; // optional: make digits stand out
+    padding: 4px 6px;
+    border-radius: 4px;
+    min-width: 24px;
+    text-align: center;
+  }
+
+  b {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 2px;
+  }
+}
