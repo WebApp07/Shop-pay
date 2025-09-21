@@ -46,7 +46,7 @@ export default function ProductsSwiper({ header, products }) {
                     ? `${product.name.slice(0, 30)}...`
                     : product.name}
                 </h1>
-                <span>USD {product.price}$</span>
+                {product.price && <span>USD {product.price}$</span>}
               </div>
             </div>
           </SwiperSlide>
