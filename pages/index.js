@@ -16,13 +16,16 @@ import {
 } from "../data/home";
 import { useMediaQuery } from "react-responsive";
 import ProductsSwiper from "../components/productSwiper";
+import db from "../utils/db";
+import Product from "../../Shop-pay/models/Product";
 
-export default function Home({ country, currency }) {
+export default function Home({ country, currency, products }) {
   const { data: session } = useSession();
   //console.log(session);
 
   //console.log("Country:", country);
   //console.log("currency", currency);
+  console.log("products", products);
   const isMedium = useMediaQuery({ query: "(max-width:850px)" });
   const isMobile = useMediaQuery({ query: "(max-width:550px)" });
 
@@ -77,7 +80,11 @@ export default function Home({ country, currency }) {
 }
 
 export async function getServerSideProps() {
-  let data = await axios
+  db.connectDb();
+  let products = await Product.find().sort({ createdAt: -1 }).lean();
+  products = JSON.parse(JSON.stringify(products));
+  console.log(products);
+  const data = await axios
     .get(
       "https://api.ipregistry.co/66.165.2.7?key=ira_Q2qx7fq6i5zv9a0kAE4JoEfHkJd4No0Klibp"
     )
@@ -101,6 +108,7 @@ export async function getServerSideProps() {
         symbol: data?.currency?.symbol || "$",
         name: data?.currency?.name || "US Dollar",
       },
+      products: products,
     },
   };
 }
