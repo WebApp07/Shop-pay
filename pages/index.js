@@ -18,6 +18,7 @@ import { useMediaQuery } from "react-responsive";
 import ProductsSwiper from "../components/productSwiper";
 import db from "../utils/db";
 import Product from "../../Shop-pay/models/Product";
+import ProductCard from "../components/productCard";
 
 export default function Home({ country, currency, products }) {
   const { data: session } = useSession();
@@ -71,6 +72,12 @@ export default function Home({ country, currency, products }) {
             products={homeImprovSwiper}
             header="House Improvements"
           />
+
+          <div className={styles.products}>
+            {products.map((product) => (
+              <ProductCard product={product} key={product._id} />
+            ))}
+          </div>
         </div>
       </div>
 
@@ -83,7 +90,7 @@ export async function getServerSideProps() {
   db.connectDb();
   let products = await Product.find().sort({ createdAt: -1 }).lean();
   products = JSON.parse(JSON.stringify(products));
-  console.log(products);
+  //console.log(products);
   const data = await axios
     .get(
       "https://api.ipregistry.co/66.165.2.7?key=ira_Q2qx7fq6i5zv9a0kAE4JoEfHkJd4No0Klibp"
